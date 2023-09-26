@@ -2,8 +2,8 @@ package handler
 
 import (
 	"github.com/deuuus/bmstu-rsoi/pkg/service"
-	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 )
 
 type Handler struct {
@@ -24,7 +24,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	router.Use(cors.New(config))
 
-	api := router.Group("/api/v1")
+	api := router.Group("api/v1")
 	{
 		persons := api.Group("/persons")
 		{
