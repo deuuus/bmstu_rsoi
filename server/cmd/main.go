@@ -34,8 +34,7 @@ func main() {
 	service := service.NewService(repos)
 	handlers := handler.NewHandler(service)
 
-	srv := new(server.Server)
-	srv.Run(viper.GetString("port"), handlers.InitRoutes())
+	server.Run(handlers.InitRoutes())
 }
 
 func initConfig() error {
