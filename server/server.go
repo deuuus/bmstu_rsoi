@@ -12,13 +12,13 @@ type Server struct {
 
 func (s *Server) Run(port string, handler http.Handler) error {
 	s.httpServer = &http.Server{
-		Addr: "localhost:" + "8080",
+		Addr: "localhost:" + port,
 		Handler: handler,
 		MaxHeaderBytes: 1 << 20,
 		ReadTimeout: 10 * time.Second,
 		WriteTimeout: 10 * time.Second,
 	}
-	return s.httpServer.ListenAndServe()
+	return http.ListenAndServe("localhost:8080", handler)
 }
 
 func (s *Server) Shutdown(ctx context.Context) error {
