@@ -25,7 +25,9 @@ jobs:
         run: |
           docker-compose -f docker-compose.yml build
           docker-compose -f docker-compose.yml up -d
-
+      
+      - name: Unit tests
+        run: cd server/pkg/handler && go test 
       # TODO build, test and deploy project
 
       - name: Run API Tests
