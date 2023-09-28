@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/jmoiron/sqlx"
-	"github.com/sirupsen/logrus"
 )
 
 type Config struct {
@@ -24,12 +23,10 @@ func NewPostgresDB(cfg Config) (*sqlx.DB, error) {
 		return nil, err
 	}
 	
-	err = db.Ping()
+	/*err = db.Ping()
 	if err != nil {
 		return nil, err
-	}
-
-	logrus.Infof("here")
+	}*/
 
 	return db, nil
 }
