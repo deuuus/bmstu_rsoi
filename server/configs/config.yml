@@ -1,9 +1,9 @@
 port: "8080"
 
 db:
-    username: "program"
-    host: "0.0.0.0"
+    username: "postgres"
+    host: "postgres"
     port: "5432"
     dbname: "persons"
     sslmode: "disable"
-    password: "test"
+    password: "postgres"
