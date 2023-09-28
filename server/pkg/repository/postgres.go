@@ -24,12 +24,12 @@ func NewPostgresDB(cfg Config) (*sqlx.DB, error) {
 		return nil, err
 	}
 	
-	logrus.Infof("here")
-
 	err = db.Ping()
 	if err != nil {
 		return nil, err
 	}
+
+	logrus.Infof("here")
 
 	return db, nil
 }
