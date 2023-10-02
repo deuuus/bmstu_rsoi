@@ -37,11 +37,11 @@ jobs:
           delayRequest: 100
           reporters: '[ "cli" ]'
           
-      #- name: Deploy
-      #  env:
-      #    deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
-      #  run: |
-      #    curl "$deploy_url"
+      - name: Deploy
+        env:
+          deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          curl "$deploy_url"
 
       #- name: Autograding
       #  uses: education/autograding@v1
