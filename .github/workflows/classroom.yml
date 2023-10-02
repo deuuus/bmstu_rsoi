@@ -42,7 +42,7 @@ jobs:
 
       - name: Push Docker images
         run: |
-          docker-compose -f docker-compose.yml push render-docker:persons-service
+          docker-compose -f docker-compose.yml push backend
 
       #- name: Deploy
       #  env:
