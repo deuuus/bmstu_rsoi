@@ -5,7 +5,7 @@ WORKDIR /app
 COPY ./server .
 
 FROM postgres:latest
-COPY /postgres/init.sql /docker-entrypoint-initdb.d/
+COPY /postgres/10-create-user-and-db.sql /docker-entrypoint-initdb.d/
 CMD ["postgres"]
 
 RUN go build -o main ./cmd
