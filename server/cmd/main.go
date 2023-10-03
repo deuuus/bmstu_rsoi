@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	server "github.com/deuuus/bmstu-rsoi"
 	"github.com/deuuus/bmstu-rsoi/pkg/handler"
 	"github.com/deuuus/bmstu-rsoi/pkg/repository"
@@ -13,7 +14,9 @@ import (
 func main() {
 	logrus.SetFormatter(new(logrus.JSONFormatter))
 
-	if err := initConfig(); err != nil {
+	configName := flag.String("config", "config", "Path to configuration file")
+
+	if err := initConfig(*configName); err != nil {
 		logrus.Fatalf("error while config initializition: %s", err.Error())
 	}
 
@@ -37,8 +40,8 @@ func main() {
 	server.Run(handlers.InitRoutes())
 }
 
-func initConfig() error {
+func initConfig(configName string) error {
 	viper.AddConfigPath("configs")
-	viper.SetConfigName("config")
+	viper.SetConfigName(configName)
 	return viper.ReadInConfig()
 }
