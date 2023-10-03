@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	server "github.com/deuuus/bmstu-rsoi"
 	"github.com/deuuus/bmstu-rsoi/pkg/handler"
 	"github.com/deuuus/bmstu-rsoi/pkg/repository"
@@ -14,13 +13,9 @@ import (
 func main() {
 	logrus.SetFormatter(new(logrus.JSONFormatter))
 
-	configName := flag.String("config", "config", "Path to configuration file")
-
-	if err := initConfig(*configName); err != nil {
+	if err := initConfig(); err != nil {
 		logrus.Fatalf("error while config initializition: %s", err.Error())
 	}
-
-	logrus.Info(configName)
 
 	db, err := repository.NewPostgresDB(repository.Config{
 		Host:     viper.GetString("db.host"),
@@ -30,8 +25,6 @@ func main() {
 		SSLMode:  viper.GetString("db.sslmode"),
 		Password: viper.GetString("db.password"),
 	})
-
-	logrus.Info(viper.GetString("db.host"), viper.GetString("db.port"), viper.GetString("db.username"))
 
 	if err != nil {
 		logrus.Fatalf("error while db initializition: %s", err.Error())
@@ -44,8 +37,8 @@ func main() {
 	server.Run(handlers.InitRoutes())
 }
 
-func initConfig(configName string) error {
+func initConfig() error {
 	viper.AddConfigPath("configs")
-	viper.SetConfigName(configName)
+	viper.SetConfigName("config")
 	return viper.ReadInConfig()
 }
