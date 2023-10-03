@@ -37,18 +37,11 @@ jobs:
           delayRequest: 100
           reporters: '[ "cli" ]'
 
-      - name: Login to Docker Hub
-        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
-
-      - name: Push Docker images
+      - name: Deploy
+        env:
+          deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
-          docker-compose -f docker-compose.yml push backend
-
-      #- name: Deploy
-      #  env:
-      #    deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
-      #  run: |
-      #    curl "$deploy_url"
+          curl "$deploy_url"
 
       #- name: Autograding
       #  uses: education/autograding@v1
