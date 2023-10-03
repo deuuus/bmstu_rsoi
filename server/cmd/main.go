@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	server "github.com/deuuus/bmstu-rsoi"
 	"github.com/deuuus/bmstu-rsoi/pkg/handler"
 	"github.com/deuuus/bmstu-rsoi/pkg/repository"
@@ -21,8 +20,7 @@ func main() {
 		logrus.Fatalf("error while config initializition: %s", err.Error())
 	}
 
-	logrus.Infof(fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=%s",
-		cfg.Host, cfg.Port, cfg.Username, cfg.DBName, cfg.Password, cfg.SSLMode))
+	logrus.Info(configName)
 
 	db, err := repository.NewPostgresDB(repository.Config{
 		Host:     viper.GetString("db.host"),
@@ -32,6 +30,8 @@ func main() {
 		SSLMode:  viper.GetString("db.sslmode"),
 		Password: viper.GetString("db.password"),
 	})
+
+	logrus.Info(viper.GetString("db.host"), viper.GetString("db.port"), viper.GetString("db.username"))
 
 	if err != nil {
 		logrus.Fatalf("error while db initializition: %s", err.Error())
